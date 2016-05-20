@@ -5,6 +5,7 @@
  */
 package fitnessapp;
 import com.jfoenix.controls.JFXTextArea;
+import com.jfoenix.controls.JFXTextField;
 import java.io.File;
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -14,7 +15,8 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import javafx.scene.media.Track;
+import javafx.scene.text.Text;
+import jgpx.model.gpx.Track;
 import javafx.stage.FileChooser;
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBElement;
@@ -33,18 +35,20 @@ import jgpx.util.DateTimeUtils;
 public class mainwindowController implements Initializable {
     
     @FXML
-    private Label date;
+    private Text date;
     @FXML
     private Button Load;
     @FXML
-    private JFXTextArea title;
+    private JFXTextField title;
     
-    @FXML
+    private TrackData trackData;
+    
     private void handleButtonAction(ActionEvent event) {
         System.out.println("You clicked me!");
         date.setText("Hello World!");
     }
     
+    @FXML
         private void load(ActionEvent event) throws JAXBException {
         FileChooser fileChooser = new FileChooser();
         File file = fileChooser.showOpenDialog(Load.getScene().getWindow());
@@ -56,16 +60,17 @@ public class mainwindowController implements Initializable {
         Unmarshaller unmarshaller = jaxbContext.createUnmarshaller();
         JAXBElement<Object> root = (JAXBElement<Object>) unmarshaller.unmarshal(file);
         GpxType gpx = (GpxType) root.getValue();
-/*
+        
         if (gpx != null) {
             trackData = new TrackData(new Track(gpx.getTrk().get(0)));
             showTrackInfo(trackData);
             date.setText("GPX successfully loaded");
+            System.out.println("\n\n " + trackData.getChunks().toString());
         } else {
             date.setText("Error loading GPX from " + file.getName());
         }
         
-        */
+        
     }
     
       // Testing to see if the import works //
@@ -86,7 +91,7 @@ public class mainwindowController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        // TODO
+        
     }    
     
 }
