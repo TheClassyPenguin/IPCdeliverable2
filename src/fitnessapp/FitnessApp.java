@@ -19,11 +19,13 @@ public class FitnessApp extends Application {
     
     @Override
     public void start(Stage stage) throws Exception {
-        Parent root = FXMLLoader.load(getClass().getResource("mainwindow.fxml"));
-        
-        Scene scene = new Scene(root);
-        
+        FXMLLoader myLoader = new FXMLLoader(getClass().getResource("mainwindowv2.fxml"));
+        Parent root = myLoader.load();
+        Mainwindowv2Controller window1 = myLoader.<Mainwindowv2Controller>getController();        
+        Scene scene = new Scene(root);        
         stage.setScene(scene);
+        stage.setTitle("Empty Route");
+        window1.initData(stage);
         stage.show();
     }
 

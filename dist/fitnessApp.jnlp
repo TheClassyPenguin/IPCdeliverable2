@@ -8,7 +8,7 @@
   </information>
   <resources>
     <j2se version="1.6+" href="http://java.sun.com/products/autodl/j2se"/>
-    <jar href="fitnessApp.jar" size="6161" download="eager" />
+    <jar href="fitnessApp.jar" size="19873" download="eager" />
     <jar href="lib\jGPX.jar" size="63961" download="eager" />
     <jar href="lib\jfoenix.jar" size="2125248" download="eager" />
   </resources>
