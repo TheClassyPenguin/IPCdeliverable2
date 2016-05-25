@@ -6,6 +6,7 @@
 package fitnessapp;
 
 import java.io.File;
+import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
@@ -13,8 +14,11 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.geometry.Insets;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.chart.AreaChart;
 import javafx.scene.chart.LineChart;
 import javafx.scene.chart.XYChart;
@@ -48,8 +52,6 @@ public class Mainwindowv2Controller implements Initializable {
     private Stage stage;
     private Track track;
     private TrackData trackData;
-    private ToggleSwitch toggleSwitch;
-    @FXML
     private HBox leftPan;
     @FXML
     private Label rstart;
@@ -96,10 +98,6 @@ public class Mainwindowv2Controller implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
-
-        toggleSwitch = new ToggleSwitch();
-        leftPan.getChildren().add(toggleSwitch);
-        HBox.setMargin(toggleSwitch, new Insets(5, 5, 5, 5));
         trackListBckp = new ArrayList<>();
     }
 
@@ -130,6 +128,21 @@ public class Mainwindowv2Controller implements Initializable {
 
     public void initData(Stage stage) {
         this.stage = stage;
+        rstart.setText(" ");
+        rend.setText(" ");
+        exc.setText(" ");
+        dur.setText(" ");
+        dist.setText(" ");
+        amt.setText(" ");
+        mspd.setText(" ");
+        aspd.setText(" ");
+        maxHR.setText(" ");
+        minHR.setText(" ");
+        aHR.setText(" ");
+        maxPR.setText(" ");
+        aPR.setText(" ");
+        
+        
     }
 
     private void addRoute() {
@@ -182,6 +195,17 @@ public class Mainwindowv2Controller implements Initializable {
         heartChart.setCreateSymbols(false);
         pedalChart.getData().add(pedalDist);
         pedalChart.setCreateSymbols(false);
+    }
+    
+    public void clear(ActionEvent event) throws IOException{
+        FXMLLoader myLoader = new FXMLLoader(getClass().getResource("mainwindowv2.fxml"));
+        Parent root = myLoader.load();
+        Mainwindowv2Controller window1 = myLoader.<Mainwindowv2Controller>getController();        
+        Scene scene = new Scene(root);        
+        stage.setScene(scene);
+        stage.setTitle("Empty Route");
+        window1.initData(stage);
+        stage.show();
     }
 
 }
